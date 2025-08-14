@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baxtard Style</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="cart-icon" onclick="toggleCart()">
+        🛒
+        <span id="cart-count">0</span>
+      </div>
+    </nav>
+  </header>
+
+  <section id="inicio" class="banner-section">
+    <img src="images/banner.jpg" class="banner-bg" alt="Banner"/>
+    <div class="portadas">
+      <img src="images/portada1.jpg" />
+      <img src="images/portada2.jpg" />
+      <img src="images/portada3.jpg" />
+      <img src="images/portada4.jpg" />
+      <img src="images/portada5.jpg" />
+    </div>
+  </section>
+
+  <section id="catalogo" class="catalog-section">
+    <div class="producto">
+      <div class="carrusel">
+        <img src="images/camisaflorecerfrontal.jpg" class="active" />
+        <img src="images/camisaflorecertrasera.jpg" />
+      </div>
+      <h3>Camiseta Florecer</h3>
+      <p>$90.000</p>
+      <button onclick="agregarAlCarrito('Camiseta Florecer', 70000)">Agregar al carrito</button>
+    </div>
+
+    <div class="producto">
+      <div class="carrusel">
+        <img src="images/CamisetaGranVueloFrontal.jpg" class="active" />
+        <img src="images/CamisetaGranVueloTrasera.jpg" />
+      </div>
+      <h3>Camiseta Gran Vuelo</h3>
+      <p>$90.000</p>
+      <button onclick="agregarAlCarrito('Camiseta Gran Vuelo', 75000)">Agregar al carrito</button>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto-section">
+    <h2>Contáctanos</h2>
+    <p>Instagram: <a href="https://www.instagram.com/baxtard.style/" target="_blank">@baxtard.style</a></p>
+    <p>WhatsApp: <a href="https://wa.me/573224647813" target="_blank">+57 322 4647813</a></p>
+  </section>
+
+  <footer>
+    <img src="images/logo.png" alt="Logo" class="logo-footer"/>
+  </footer>
+
+  <!-- Carrito desplegable -->
+  <div id="cart" class="cart-hidden">
+    <h3>Carrito</h3>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="cart-total">0</span></p>
+  </div>
+
+  <script>
+    let carrito = [];
+    function agregarAlCarrito(nombre, precio) {
+      carrito.push({ nombre, precio });
+      actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+      const cartItems = document.getElementById("cart-items");
+      const cartTotal = document.getElementById("cart-total");
+      const cartCount = document.getElementById("cart-count");
+      cartItems.innerHTML = "";
+      let total = 0;
+      carrito.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.nombre} - $${item.precio}`;
+        cartItems.appendChild(li);
+        total += item.precio;
+      });
+      cartTotal.textContent = total;
+      cartCount.textContent = carrito.length;
+    }
+
+    function toggleCart() {
+      const cart = document.getElementById("cart");
+      cart.classList.toggle("cart-hidden");
+    }
+
+    // Carrusel de imágenes al hacer clic
+    document.querySelectorAll(".carrusel").forEach(carrusel => {
+      let index = 0;
+      const imgs = carrusel.querySelectorAll("img");
+      carrusel.addEventListener("click", () => {
+        imgs[index].classList.remove("active");
+        index = (index + 1) % imgs.length;
+        imgs[index].classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
